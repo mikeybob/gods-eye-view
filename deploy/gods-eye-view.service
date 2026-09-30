@@ -1,0 +1,26 @@
+[Unit]
+Description=God's Eye View (Vite preview :4173)
+Documentation=https://github.com/mikeybob/gods-eye-view
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=mike
+Group=mike
+WorkingDirectory=/mnt/rocket/gods-eye-view
+Environment=HOST=0.0.0.0
+Environment=PORT=4173
+Environment=NODE_ENV=production
+Environment=PATH=/home/mike/.nvm/versions/node/v24.21.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/home/mike/.nvm/versions/node/v24.21.0/bin/node node_modules/vite/bin/vite.js preview --host 0.0.0.0 --port 4173 --strictPort
+Restart=always
+RestartSec=5
+KillMode=mixed
+TimeoutStopSec=20
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=gods-eye-view
+
+[Install]
+WantedBy=multi-user.target
