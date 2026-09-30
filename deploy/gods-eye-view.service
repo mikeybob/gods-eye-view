@@ -9,11 +9,11 @@ Type=simple
 User=mike
 Group=mike
 WorkingDirectory=/mnt/rocket/gods-eye-view
-Environment=HOST=0.0.0.0
+Environment=HOST=10.99.10.99
 Environment=PORT=4173
 Environment=NODE_ENV=production
 Environment=PATH=/home/mike/.nvm/versions/node/v24.21.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ExecStart=/home/mike/.nvm/versions/node/v24.21.0/bin/node node_modules/vite/bin/vite.js preview --host 0.0.0.0 --port 4173 --strictPort
+ExecStart=/home/mike/.nvm/versions/node/v24.21.0/bin/node node_modules/vite/bin/vite.js preview --host 10.99.10.99 --port 4173 --strictPort
 Restart=always
 RestartSec=5
 KillMode=mixed
