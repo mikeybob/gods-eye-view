@@ -11,6 +11,7 @@ Group=mike
 WorkingDirectory=/mnt/rocket/gods-eye-view
 Environment=HOST=10.99.10.99
 Environment=PORT=4173
+Environment=GEV_ALLOWED_HOSTS=godseyeview.demonlab.net
 Environment=NODE_ENV=production
 Environment=PATH=/home/mike/.nvm/versions/node/v24.21.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ExecStart=/home/mike/.nvm/versions/node/v24.21.0/bin/node node_modules/vite/bin/vite.js preview --host 10.99.10.99 --port 4173 --strictPort
