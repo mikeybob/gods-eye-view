@@ -20,12 +20,6 @@ test('explicit build inputs preserve browser-only defines, plugin order and loop
     '127.0.0.1',
     '.local',
   ]);
-  assert.deepEqual(config.preview.allowedHosts, [
-    'localhost',
-    '127.0.0.1',
-    '.local',
-    'godseyeview.demonlab.net',
-  ]);
   assert.ok(config.server.fs.deny.includes('**/ENVIRONMENT'));
   assert.ok(config.server.fs.deny.includes('.env.*'));
   assert.equal(config.server.headers['X-Frame-Options'], 'DENY');
@@ -37,9 +31,11 @@ test('explicit build inputs preserve browser-only defines, plugin order and loop
     'import.meta.env.GOOGLE_MAPS_API_KEY': '"browser-fixture"',
     'import.meta.env.CESIUM_ION_TOKEN': '"ion-fixture"',
   });
-  const openHost = createBrowserViteConfig({ host: '0.0.0.0', port: '4800' });
-  assert.equal(openHost.server.allowedHosts, true);
-  assert.equal(openHost.preview.allowedHosts, true);
+  assert.equal(
+    createBrowserViteConfig({ host: '0.0.0.0', port: '4800' }).server
+      .allowedHosts,
+    true,
+  );
   assert.equal(
     createBrowserViteConfig({ host: '::', port: '4800' }).server.port,
     4800,

@@ -11,8 +11,6 @@ export function createBrowserViteConfig({
   port = 4173,
   command,
 } = {}) {
-  const openToNetwork = host === '0.0.0.0' || host === '::';
-  const loopbackHosts = ['localhost', '127.0.0.1', '.local'];
   return {
     plugins: [cesium(), applicationHtmlPlugin(), ...plugins],
     ...(publicDir === undefined ? {} : { publicDir }),
@@ -33,7 +31,10 @@ export function createBrowserViteConfig({
     server: {
       host: host || 'localhost',
       port: parseInt(port, 10) || 4173,
-      allowedHosts: openToNetwork ? true : loopbackHosts,
+      allowedHosts:
+        host === '0.0.0.0' || host === '::'
+          ? true
+          : ['localhost', '127.0.0.1', '.local'],
       fs: {
         deny: ['.env', '.env.*', '*.{crt,pem}', '**/.git/**', '**/ENVIRONMENT'],
       },
@@ -42,11 +43,6 @@ export function createBrowserViteConfig({
         'X-Frame-Options': 'DENY',
         'Content-Security-Policy': "frame-ancestors 'none'",
       },
-    },
-    preview: {
-      allowedHosts: openToNetwork
-        ? true
-        : [...loopbackHosts, 'godseyeview.demonlab.net'],
     },
     define: {
       'import.meta.env.GOOGLE_MAPS_API_KEY': JSON.stringify(googleApiKey),
